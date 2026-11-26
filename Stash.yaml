@@ -1,8 +1,8 @@
 #SUBSCRIBED https://raw.githubusercontent.com/ViewWholeWorld/stash-config/refs/heads/main/Stash.yaml
 # Stash 主配置：配合本地私密覆写使用。
 # 源配置作者：Repcz（https://github.com/Repcz/Tool），由上传的主配置及覆写整理。
-# 真实订阅地址与 SOCKS5 凭据留在本地覆写中；Tailscale 在各设备内交互登录。
-# 使用前先导入本地私密覆写；切换后停用原六份覆写，避免重复合并。
+# 真实订阅地址放在单独的覆写中；Tailscale 在各设备内交互登录。
+# 使用前先从私有 Gist 导入私密覆写；切换后停用原覆写，避免重复合并。
 
 mode: rule
 log-level: info
@@ -45,20 +45,11 @@ proxy-groups:
   - Japan
   - Taiwan
   - United States
-# 私密覆写注入“静态IP｜链路｜...”节点；每个节点固定一个入口，测速包含完整链路。
-- name: 静态IP
-  type: url-test
-  interval: 600
-  tolerance: 100
-  lazy: true
-  include-all: true
-  filter: '(?i)^静态IP｜链路｜'
 - name: Manual
   icon: https://github.com/shindgewongxj/WHATSINStash/raw/main/icon/%24tash.png
   type: select
   proxies:
   - 自动兜底
-  - 静态IP
   - 倍率×10
   - 倍率×3
   - HongKong
@@ -79,12 +70,11 @@ proxy-groups:
 - name: 其他地区
   type: select
   include-all: true
-  filter: '(?i)^(?!.*静态IP｜链路｜)(?!.*(?:×|x)\s*(?:3|10)|.*(?:3|10)\s*倍).*(?:🇲🇴|澳门|澳門|Macau|🇰🇷|韩国|南韩|Korea|🇩🇪|德国|Germany|🇬🇧|英国|英國|UK|United Kingdom|🇳🇱|荷兰|荷蘭|Netherlands|🇹🇷|土耳其|Turkey|🇧🇷|巴西|Brazil|🇦🇺|澳大利亚|澳洲|Australia)'
+  filter: '(?i)^(?!.*(?:×|x)\s*(?:3|10)|.*(?:3|10)\s*倍).*(?:🇲🇴|澳门|澳門|Macau|🇰🇷|韩国|南韩|Korea|🇩🇪|德国|Germany|🇬🇧|英国|英國|UK|United Kingdom|🇳🇱|荷兰|荷蘭|Netherlands|🇹🇷|土耳其|Turkey|🇧🇷|巴西|Brazil|🇦🇺|澳大利亚|澳洲|Australia)'
 - name: Global
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
   type: select
   proxies:
-  - 静态IP
   - Manual
   - 倍率×10
   - 倍率×3
@@ -100,7 +90,6 @@ proxy-groups:
   proxies:
   - Global
   - Manual
-  - 静态IP
   - HongKong
   - United States
   - Singapore
@@ -112,7 +101,6 @@ proxy-groups:
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
   type: select
   proxies:
-  - 静态IP
   - Manual
   - HongKong
   - United States
@@ -124,7 +112,6 @@ proxy-groups:
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png
   type: select
   proxies:
-  - 静态IP
   - Manual
   - HongKong
   - United States
@@ -137,7 +124,6 @@ proxy-groups:
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
   type: select
   proxies:
-  - 静态IP
   - Manual
   - HongKong
   - United States
@@ -149,7 +135,6 @@ proxy-groups:
   icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/OpenAI.png
   type: select
   proxies:
-  - 静态IP
   - Manual
   - HongKong
   - United States
@@ -161,7 +146,6 @@ proxy-groups:
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Twitter.png
   type: select
   proxies:
-  - 静态IP
   - Manual
   - HongKong
   - United States
@@ -173,7 +157,6 @@ proxy-groups:
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
   type: select
   proxies:
-  - 静态IP
   - Manual
   - HongKong
   - United States
@@ -185,7 +168,6 @@ proxy-groups:
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Game.png
   type: select
   proxies:
-  - 静态IP
   - Manual
   - HongKong
   - United States
@@ -198,7 +180,6 @@ proxy-groups:
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
   type: select
   proxies:
-  - 静态IP
   - Manual
   - HongKong
   - United States
@@ -211,7 +192,6 @@ proxy-groups:
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
   type: select
   proxies:
-  - 静态IP
   - Manual
   - HongKong
   - United States
@@ -223,7 +203,6 @@ proxy-groups:
   icon: https://github.com/shindgewongxj/WHATSINStash/raw/main/icon/friestash.png
   type: select
   proxies:
-  - 静态IP
   - Manual
   - HongKong
   - United States
@@ -238,7 +217,7 @@ proxy-groups:
   interval: 600
   tolerance: 100
   lazy: true
-  filter: '(?i)^(?!.*静态IP｜链路｜)(?!.*(?:×|x)\s*(?:3|10)|.*(?:3|10)\s*倍).*(?:🇭🇰|香港|(\b(HK|Hong)\b))'
+  filter: '(?i)^(?!.*(?:×|x)\s*(?:3|10)|.*(?:3|10)\s*倍).*(?:🇭🇰|香港|(\b(HK|Hong)\b))'
   include-all: true
 - name: United States
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
@@ -246,7 +225,7 @@ proxy-groups:
   interval: 600
   tolerance: 100
   lazy: true
-  filter: '(?i)^(?!.*静态IP｜链路｜)(?!.*(?:×|x)\s*(?:3|10)|.*(?:3|10)\s*倍).*(?:🇺🇸|美国|洛杉矶|圣何塞|(\b(US|United States)\b))'
+  filter: '(?i)^(?!.*(?:×|x)\s*(?:3|10)|.*(?:3|10)\s*倍).*(?:🇺🇸|美国|洛杉矶|圣何塞|(\b(US|United States)\b))'
   include-all: true
 - name: Singapore
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
@@ -254,7 +233,7 @@ proxy-groups:
   interval: 600
   tolerance: 100
   lazy: true
-  filter: '(?i)^(?!.*静态IP｜链路｜)(?!.*(?:×|x)\s*(?:3|10)|.*(?:3|10)\s*倍).*(?:🇸🇬|新加坡|狮|(\b(SG|Singapore)\b))'
+  filter: '(?i)^(?!.*(?:×|x)\s*(?:3|10)|.*(?:3|10)\s*倍).*(?:🇸🇬|新加坡|狮|(\b(SG|Singapore)\b))'
   include-all: true
 - name: Japan
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
@@ -262,7 +241,7 @@ proxy-groups:
   interval: 600
   tolerance: 100
   lazy: true
-  filter: '(?i)^(?!.*静态IP｜链路｜)(?!.*(?:×|x)\s*(?:3|10)|.*(?:3|10)\s*倍).*(?:🇯🇵|日本|东京|(\b(JP|Japan)\b))'
+  filter: '(?i)^(?!.*(?:×|x)\s*(?:3|10)|.*(?:3|10)\s*倍).*(?:🇯🇵|日本|东京|(\b(JP|Japan)\b))'
   include-all: true
 - name: Taiwan
   icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
@@ -270,7 +249,7 @@ proxy-groups:
   interval: 600
   tolerance: 100
   lazy: true
-  filter: '(?i)^(?!.*静态IP｜链路｜)(?!.*(?:×|x)\s*(?:3|10)|.*(?:3|10)\s*倍).*(?:🇨🇳|🇹🇼|台湾|(\b(TW|Tai|Taiwan)\b))'
+  filter: '(?i)^(?!.*(?:×|x)\s*(?:3|10)|.*(?:3|10)\s*倍).*(?:🇨🇳|🇹🇼|台湾|(\b(TW|Tai|Taiwan)\b))'
   include-all: true
 - name: tailscale
   type: select

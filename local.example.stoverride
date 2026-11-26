@@ -1,6 +1,7 @@
-# 此文件包含私人信息，只导入 Stash 本地，禁止提交到 GitHub。
-name: 本地配置
-desc: 包含真实订阅、静态 SOCKS5 凭据和静态 IP 完整链路测速副本，仅在本地启用；Tailscale 在每台设备内单独登录。禁止上传公开仓库。
+# 私密覆写模板：复制到你的私有 Gist（方案 A），替换占位内容后从 Gist URL 安装。
+# 禁止把填入真实凭据的版本提交到任何公开仓库。
+name: 私密覆写
+desc: 注入真实订阅（proxy-providers）与 Tailscale 节点；通过私有 Gist URL 安装，改凭据直接改 Gist。
 dns:
   follow-rule: true
   fallback:
@@ -28,49 +29,16 @@ proxy-providers: #!replace
     benchmark-url: http://www.gstatic.com/generate_204
     benchmark-timeout: 5
 proxies: #!replace
-  - name: 静态IP｜链路｜香港
-    type: socks5
-    server: proxy.example.invalid
-    port: 7078
-    username: REPLACE_WITH_USERNAME
-    password: REPLACE_WITH_PASSWORD
-    dialer-proxy: HongKong
-  - name: 静态IP｜链路｜新加坡
-    type: socks5
-    server: proxy.example.invalid
-    port: 7078
-    username: REPLACE_WITH_USERNAME
-    password: REPLACE_WITH_PASSWORD
-    dialer-proxy: Singapore
-  - name: 静态IP｜链路｜日本
-    type: socks5
-    server: proxy.example.invalid
-    port: 7078
-    username: REPLACE_WITH_USERNAME
-    password: REPLACE_WITH_PASSWORD
-    dialer-proxy: Japan
-  - name: 静态IP｜链路｜台湾
-    type: socks5
-    server: proxy.example.invalid
-    port: 7078
-    username: REPLACE_WITH_USERNAME
-    password: REPLACE_WITH_PASSWORD
-    dialer-proxy: Taiwan
-  - name: 静态IP｜链路｜美国
-    type: socks5
-    server: proxy.example.invalid
-    port: 7078
-    username: REPLACE_WITH_USERNAME
-    password: REPLACE_WITH_PASSWORD
-    dialer-proxy: United States
   - name: beans
     type: tailscale
     dialer-proxy: Manual
     auto-route-disabled: false
     direct-peer-udp: true
 rules:
+  # Tailscale 控制域名沿用原有分流。
   - DOMAIN-SUFFIX,tailscale.com,Manual
   - DOMAIN-SUFFIX,tailscale.net,Manual
+  # 其他自定义分流
   - DOMAIN-SUFFIX,opencode.ai,AI
   - DOMAIN-SUFFIX,ippure.com,AI
   - DOMAIN-SUFFIX,tesla.cn,DIRECT
