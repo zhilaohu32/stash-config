@@ -23,11 +23,6 @@ proxy-providers: #!replace
     benchmark-url: http://www.gstatic.com/generate_204
     benchmark-timeout: 5
     interval: 86400
-  ProviderB:
-    url: https://example.invalid/replace-with-your-subscription-url
-    interval: 86400
-    benchmark-url: http://www.gstatic.com/generate_204
-    benchmark-timeout: 5
 proxies: #!replace
   - name: beans
     type: tailscale
